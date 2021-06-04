@@ -28,6 +28,19 @@ function numberOfOccurrencesInText(word, text) {
   return wordCount;
 }
 
+let passage = $("#text-passage").val();
+function mostUsedWords(text) { 
+  let passage = text.split(" ");
+  let wordContent = {};
+
+  for (let i = 0; i < passage.length; i++) {
+    let currentMostUsedWords = wordContent[passage[i]];
+    let count = currentMostUsedWords ? currentMostUsedWords : 0;
+    wordContent[passage[i]] = count + 1;
+  }
+  return wordContent;
+}
+
 // UI logic
 
 $(document).ready(function () {
@@ -37,8 +50,10 @@ $(document).ready(function () {
     const word = $("#word").val();
     const wordCount = wordCounter(passage);
     const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
+    const mostWords = mostUsedWords(word);
     $("#total-count").html(wordCount);
     $("#selected-count").html(occurrencesOfWord);
+    $("#mostWord").html(mostWords);
   });
 });
 
